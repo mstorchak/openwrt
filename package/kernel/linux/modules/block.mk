@@ -218,7 +218,7 @@ $(eval $(call KernelPackage,dax))
 define KernelPackage/dm
   SUBMENU:=$(BLOCK_MENU)
   TITLE:=Device Mapper
-  DEPENDS:=+kmod-crypto-manager +kmod-dax
+  DEPENDS:= +kmod-dax
   # All the "=n" are unnecessary, they're only there
   # to stop the config from asking the question.
   # MIRROR is M because I've needed it for pvmove.
@@ -235,15 +235,14 @@ define KernelPackage/dm
 	CONFIG_DM_LOG_USERSPACE=n \
 	CONFIG_MD=y \
 	CONFIG_BLK_DEV_DM \
-	CONFIG_DM_CRYPT \
+	CONFIG_DM_CRYPT=n \
 	CONFIG_DM_MIRROR
   FILES:= \
     $(LINUX_DIR)/drivers/md/dm-mod.ko \
-    $(LINUX_DIR)/drivers/md/dm-crypt.ko \
     $(LINUX_DIR)/drivers/md/dm-log.ko \
     $(LINUX_DIR)/drivers/md/dm-mirror.ko \
     $(LINUX_DIR)/drivers/md/dm-region-hash.ko
-  AUTOLOAD:=$(call AutoLoad,30,dm-mod dm-log dm-region-hash dm-mirror dm-crypt)
+  AUTOLOAD:=$(call AutoLoad,30,dm-mod dm-log dm-region-hash dm-mirror)
 endef
 
 define KernelPackage/dm/description
