@@ -106,6 +106,7 @@ ifeq ($(SSL_VARIANT),openssl)
   endif
   ifeq ($(LOCAL_VARIANT),full)
     DRIVER_MAKEOPTS += CONFIG_OWE=y CONFIG_SUITEB192=y CONFIG_AP=y CONFIG_MESH=y
+    DRIVER_MAKEOPTS += CONFIG_RADIUS_SERVER=y
   endif
 endif
 
