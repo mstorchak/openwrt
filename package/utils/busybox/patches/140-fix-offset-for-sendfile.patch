@@ -1,0 +1,13 @@
+diff --git a/networking/httpd.c b/networking/httpd.c
+index a0a4abc..66789e3 100644
+--- a/networking/httpd.c
++++ b/networking/httpd.c
+@@ -1808,7 +1808,7 @@ static NOINLINE void send_file_and_exit(const char *url, int what)
+ 		send_headers(HTTP_OK);
+ #if ENABLE_FEATURE_USE_SENDFILE
+ 	{
+-		off_t offset = range_start;
++		off_t offset = (range_start==-1)?0:range_start;
+ 		while (1) {
+ 			/* sz is rounded down to 64k */
+ 			ssize_t sz = MAXINT(ssize_t) - 0xffff;
